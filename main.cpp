@@ -7,12 +7,12 @@
 using namespace std;
 
 // Our spaceship structure
-struct spaceship
+struct
 {
     int x = rand()%10, y= rand()%10;
     char c = '#';
     int heal = 3;
-};
+}mySpaceShip;
 
 // function portotype
 void grandDraw(int condition[col][row]);
@@ -23,7 +23,6 @@ int howManyEnemy(void);
 int main()
 {
     srand(time(NULL));
-    spaceship mySpaceShip;
     int NumberOfEnemys = howManyEnemy();
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
     condition[mySpaceShip.x][mySpaceShip.y] = 1;
@@ -42,9 +41,7 @@ int main()
         }
     }
     while ( mySpaceShip.heal != 0 )
-    {
-        cout << "****************************************************STARWAR****************************************************";
-        cout << "\nhealth:" << mySpaceShip.heal << endl; 
+    { 
         grandDraw(condition);
         getchar();
     }
@@ -63,6 +60,8 @@ void horizontalDraw(void)
 void grandDraw(int condition[col][row])
 {
     system("cls");
+    cout << "****************************************************STARWAR****************************************************";
+    cout << "\nhealth:" << mySpaceShip.heal << endl;
     for (int i = 0;i < row;i++)
     {
         horizontalDraw();
