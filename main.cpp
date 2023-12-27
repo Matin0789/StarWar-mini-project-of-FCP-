@@ -1,4 +1,6 @@
 #include <iostream>
+#include <windows.h>
+#include <conio.h>
 #include <stdlib.h> 
 #include <ctime>
 
@@ -22,14 +24,17 @@
 
 #define row 10
 #define col 10
+#define NumberOfEnemys 10
 
 using namespace std;
 
+// global variables
+const int xFirst = rand()%col;
+const int yFirst = rand()%row;
 // Our spaceship structure
-struct
+struct 
 {
-    int x = rand()%10, y= rand()%10;
-    char c = '#';
+    int x, y;
     int health = 3;
 }mySpaceShip;
 
@@ -45,8 +50,9 @@ void shoot(int condition[col][row]);
 int main()
 {
     srand(time(NULL));
-    int NumberOfEnemys = howManyEnemy();
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
+    mySpaceShip.x = xFirst;
+    mySpaceShip.y = yFirst;
     condition[mySpaceShip.x][mySpaceShip.y] = 1;
     for (int i = 0;i < NumberOfEnemys;i++)
     {
@@ -106,99 +112,126 @@ void grandDraw(int condition[col][row])
     horizontalDraw();
 }
 
-int howManyEnemy(void)
-{
-    int howMany = rand() % (row * (col - 1) - col) +  (col + 1);
-    return howMany;
-}
 void action(int condition[col][row])
 {
     char moveOrShoot;
-    cout << "\nmove or shoot[m/s]:";
-    cin >> moveOrShoot;
-    switch (moveOrShoot)
+    bool flag =true;
+    do
     {
-    case 'm':
-        move(condition);
-        break;
+        cout << "\nmove or shoot[m/s]:";
+        cin >> moveOrShoot;
+        switch (moveOrShoot)
+        {
+        case 'm':
+            move(condition);
+            flag = true;
+            break;
 
-    case 's':
-        shoot(condition);
-        break;
-    default:
-        cout << RED << "undefined please enter to try again" << RESET << endl;
-        getchar();
-        break;
-    }
+        case 's':
+            shoot(condition);
+            flag = true;
+            break;
+
+        default:
+            cout << RED << "undefined please try again" << RESET << endl;
+            flag = false;
+        }
+    } while (flag = false);
 }
 
 void move(int condition[col][row])
 {
     char move;
-    cout << "up or down or left or right[u/d/l/r]:";
-    cin >> move;
-    switch (move)
+    bool flag = true;
+    do
     {
-    case 'u':
-        if (condition[mySpaceShip.x][mySpaceShip.y - 1] == 0)
+        cout << "up or down or left or right[u/d/l/r]:";
+        cin >> move;
+        switch (move)
         {
-            condition[mySpaceShip.x][mySpaceShip.y]=0;
-            mySpaceShip.y--;
-            condition[mySpaceShip.x][mySpaceShip.y]=1;
+        case 'u':
+            if (condition[mySpaceShip.x][mySpaceShip.y - 1] == 2)
+            {
+                mySpaceShip.health--;
+                cout << RED << "!--ops--" << RESET;
+                condition[mySpaceShip.x][mySpaceShip.y] = 0;
+                mySpaceShip.x = xFirst;
+                mySpaceShip.y = yFirst;
+                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                getchar();
+            }
+            else if(mySpaceShip.y - 1 >= 0 && mySpaceShip.y - 1 < row)
+            {
+                condition[mySpaceShip.x][mySpaceShip.y]=0;
+                mySpaceShip.y--;
+                condition[mySpaceShip.x][mySpaceShip.y]=1;
+                flag = true;
+            }
+            break;
+        case 'd':
+            if (condition[mySpaceShip.x][mySpaceShip.y + 1] == 2)
+            {
+                mySpaceShip.health--;
+                cout << RED << "!--ops--" << RESET;
+                condition[mySpaceShip.x][mySpaceShip.y] = 0;
+                mySpaceShip.x = xFirst;
+                mySpaceShip.y = yFirst;
+                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                getchar();
+            }
+            else if(mySpaceShip.y + 1 >= 0 && mySpaceShip.y + 1 < row)
+            {
+                condition[mySpaceShip.x][mySpaceShip.y]=0;
+                mySpaceShip.y++;
+                condition[mySpaceShip.x][mySpaceShip.y]=1;
+                flag = true;
+            }   
+            break;
+        case 'r':
+            if (condition[mySpaceShip.x + 1][mySpaceShip.y] == 2)
+            {
+                mySpaceShip.health--;
+                cout << RED << "!--ops--" << RESET;
+                condition[mySpaceShip.x][mySpaceShip.y] = 0;
+                mySpaceShip.x = xFirst;
+                mySpaceShip.y = yFirst;
+                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                getchar();
+            }
+            else if(mySpaceShip.x + 1 >= 0 && mySpaceShip.x + 1 < col)
+            {
+                condition[mySpaceShip.x][mySpaceShip.y]=0;
+                mySpaceShip.x++;
+                condition[mySpaceShip.x][mySpaceShip.y]=1;
+                flag = true;
+            }
+            break;
+        case 'l':
+            if (condition[mySpaceShip.x - 1][mySpaceShip.y] == 2)
+            {
+                mySpaceShip.health--;
+                cout << RED << "!--ops--" << RESET;
+                condition[mySpaceShip.x][mySpaceShip.y] = 0;
+                mySpaceShip.x = xFirst;
+                mySpaceShip.y = yFirst;
+                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                getchar();
+            }
+            else if(mySpaceShip.x - 1 >= 0 && mySpaceShip.x - 1 < col)
+            {
+                condition[mySpaceShip.x][mySpaceShip.y]=0;
+                mySpaceShip.x--;
+                condition[mySpaceShip.x][mySpaceShip.y]=1;
+                flag = true;
+            }
+            break;
+        default:
+            cout << RED << "undefined please try again" << RESET << endl;
+            flag = false;
         }
-        else
-        {
-            mySpaceShip.health--;
-            cout << RED << "!--ops--" << RESET;
-            getchar();
-        } 
-        break;
-    case 'd':
-        if (condition[mySpaceShip.x][mySpaceShip.y + 1] == 0)
-        {
-            condition[mySpaceShip.x][mySpaceShip.y]=0;
-            mySpaceShip.y++;
-            condition[mySpaceShip.x][mySpaceShip.y]=1;
-        }
-        else
-        {
-            mySpaceShip.health--;
-            cout << RED << "!--ops--" << RESET;
-            getchar();
-        }   
-        break;
-    case 'r':
-        if (condition[mySpaceShip.x + 1][mySpaceShip.y] == 0)
-        {
-            condition[mySpaceShip.x][mySpaceShip.y]=0;
-            mySpaceShip.x++;
-            condition[mySpaceShip.x][mySpaceShip.y]=1;
-        }
-        else
-        {
-            mySpaceShip.health--;
-            cout << RED << "!--ops--" << RESET;
-            getchar();
-        }
-        break;
-    case 'l':
-        if (condition[mySpaceShip.x - 1][mySpaceShip.y] == 0)
-        {
-            condition[mySpaceShip.x][mySpaceShip.y]=0;
-            mySpaceShip.x--;
-            condition[mySpaceShip.x][mySpaceShip.y]=1;
-        }
-        else
-        {
-            mySpaceShip.health--;
-            cout << RED << "!--ops--" << RESET;
-            getchar();
-        }
-        break;
-    default:
-        cout << RED << "undefined please enter to try again" << RESET << endl;
-        break;
-    }
+    }while (flag == false);
+    
+    
     
 }
 
