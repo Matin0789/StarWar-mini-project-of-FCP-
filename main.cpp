@@ -1,7 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <ctime>
 
 #define RESET   "\033[0m"
@@ -24,7 +24,7 @@
 
 #define row 10
 #define col 10
-#define NumberOfEnemys 10
+#define NumberOfEnemys col
 
 using namespace std;
 
@@ -49,6 +49,7 @@ void shoot(int condition[col][row]);
 // main function
 int main()
 {
+    system("cls");
     srand(time(NULL));
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
     mySpaceShip.x = xFirst;
@@ -68,8 +69,34 @@ int main()
             }
         }
     }
+    for (int i = 0;i < row;i++)
+    {
+        int count = 0;
+        for (int j = 0;j < col;j++)
+        {
+            if(condition[i][j] == 2)
+                count++;
+        }
+        if (count > 9)
+        {
+            int x = rand()%col,y = rand()%row;
+            while (x == i)
+            {
+                int x = rand()%col,y = rand()%row;
+            }
+            if (condition[x][y] != 0)
+                continue;
+            else 
+            {
+                condition[x][y] = 2;
+                break;
+            }
+        }
+
+    }
     while ( mySpaceShip.health != 0 )
     { 
+        
         grandDraw(condition);
         action(condition);
         getchar();
@@ -104,6 +131,7 @@ void grandDraw(int condition[col][row])
                 cout << BOLDGREEN <<"# " << RESET;
             else if (condition[j][i] == 2)
                 cout << BOLDRED << "* " << RESET;
+                
             else
                 cout << "  ";
         }
@@ -237,5 +265,6 @@ void move(int condition[col][row])
 
 void shoot(int condition[col][row])
 {
+
 
 }
