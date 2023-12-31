@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <ctime>
 
@@ -45,11 +44,13 @@ int howManyEnemy(void);
 void action(int condition[col][row]);
 void move(int condition[col][row]);
 void shoot(int condition[col][row]);
+void run(void);
 
 // main function
 int main()
 {
     system("cls");
+    run();
     srand(time(NULL));
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
     mySpaceShip.x = xFirst;
@@ -107,7 +108,23 @@ int main()
 }
 
 
-// functions  
+// functions
+void run(void)
+{
+    cout << BOLDRED;
+    for (int i = 0;i < 32;i++)
+    {
+        cout << "*";
+        Sleep(1);
+    }
+    cout << "STARWARS";
+    for (int i = 0;i < 32;i++)
+    {
+        cout << "*";
+        Sleep(1);
+    }
+}  
+
 void horizontalDraw(void)
 {
     cout << BOLDBLUE;
@@ -118,7 +135,7 @@ void horizontalDraw(void)
 void grandDraw(int condition[col][row])
 {
     system("cls");
-    cout << BOLDGREEN <<"******************************************STARWAR******************************************" << RESET;
+    cout << BOLDGREEN <<"********************************STARWARS********************************" << RESET;
     cout << "\nhealth:" << RED << mySpaceShip.health << RESET << endl;
     for (int i = 0;i < row;i++)
     {
