@@ -282,6 +282,37 @@ void move(int condition[col][row])
 
 void shoot(int condition[col][row])
 {
+    int enemyCount = howManyEnemy();
+    if (enemyCount == 0)
+    {
+        cout << YELLOW << "No enemies left to shoot!" << RESET << endl;
+        return;
+    }
 
+    int targetX, targetY;
+    bool flag = false;
+    do
+    {
+        cout << "Enter the target coordinates (x, y): ";
+        cin >> targetX >> targetY;
+
+        if (targetX < 0 || targetX >= col || targetY < 0 || targetY >= row)
+        {
+            cout << RED << "Invalid target coordinates. Please try again." << RESET << endl;
+            
+        }
+        else if (condition[targetX][targetY] != 2)
+        {
+            cout << RED << "There is no enemy at the  coordinates. Please try again." << RESET << endl;
+        }
+        else
+        {
+            flag = true;
+        }
+    } while (!flag);
+
+    // 
+    condition[targetX][targetY] = 0;
+    cout << GREEN << "You shot an enemy at coordinates (" << targetX << ", " << targetY << ")!"  << endl;
 
 }
