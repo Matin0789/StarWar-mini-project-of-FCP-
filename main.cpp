@@ -104,6 +104,8 @@ int main()
     }
     system("cls");
     cout << RED << "********************************GAME OVER********************************"<< endl << RESET;
+    system("pause");
+    exit(0);
     return 0;
 }
 
@@ -135,6 +137,7 @@ void horizontalDraw(void)
 void grandDraw(int condition[col][row])
 {
     system("cls");
+    bool win = false;
     cout << BOLDGREEN <<"********************************STARWARS********************************" << RESET;
     cout << "\nhealth:" << RED << mySpaceShip.health << RESET << endl;
     for (int i = 0;i < row;i++)
@@ -147,14 +150,23 @@ void grandDraw(int condition[col][row])
             if (condition[j][i] == 1)
                 cout << BOLDGREEN <<"# " << RESET;
             else if (condition[j][i] == 2)
+            {
                 cout << BOLDRED << "* " << RESET;
-                
+                win = true;
+            }
             else
                 cout << "  ";
         }
         cout << BOLDBLUE<< "|" << RESET << endl;
     }
     horizontalDraw();
+    if (win == false)
+    {
+        system("cls");
+        cout << BOLDGREEN << "********************************YOU WIN********************************"<< endl << RESET;
+        system("pause");
+        exit(0);
+    }
 }
 
 void action(int condition[col][row])
@@ -282,37 +294,44 @@ void move(int condition[col][row])
 
 void shoot(int condition[col][row])
 {
-    int enemyCount = howManyEnemy();
-    if (enemyCount == 0)
-    {
-        cout << YELLOW << "No enemies left to shoot!" << RESET << endl;
-        return;
-    }
-
-    int targetX, targetY;
-    bool flag = false;
+    char shoot;
+    bool flag =true;
     do
     {
-        cout << "Enter the target coordinates (x, y): ";
-        cin >> targetX >> targetY;
-
-        if (targetX < 0 || targetX >= col || targetY < 0 || targetY >= row)
+        int x = mySpaceShip.x;
+        cout << "\nshoot right or left[r/l]:";
+        cin >> shoot;
+        switch (shoot)
         {
-            cout << RED << "Invalid target coordinates. Please try again." << RESET << endl;
-            
-        }
-        else if (condition[targetX][targetY] != 2)
-        {
-            cout << RED << "There is no enemy at the  coordinates. Please try again." << RESET << endl;
-        }
-        else
-        {
+        case 'r':
+            do
+            {
+                x++;
+                if (2 == condition[x][mySpaceShip.y])
+                {
+                    condition[x][mySpaceShip.y] = 0;
+                    break;
+                }
+            }   while(x < col);
             flag = true;
-        }
-    } while (!flag);
-
-    // a
-    condition[targetX][targetY] = 0;
-    cout << GREEN << "You shot an enemy at coordinates (" << targetX << ", " << targetY << ")!"  << endl;
-
+            break;
+        case 'l':
+            do
+            {
+                x--;
+                if (2 == condition[x][mySpaceShip.y])
+                {
+                    condition[x][mySpaceShip.y] = 0;
+                    break;
+                }
+            }while(x >= 0);
+            flag = true;
+            break;
+        default:
+            cout << RED << "undefined please try again" << RESET << endl;
+            flag = false;
+        }          
+    }while (flag == false);
 }
+   
+    
