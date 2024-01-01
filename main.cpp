@@ -311,7 +311,7 @@ void shoot(int condition[col][row])
         }
     } while (!flag);
 
-    // 
+    // a
     condition[targetX][targetY] = 0;
     cout << GREEN << "You shot an enemy at coordinates (" << targetX << ", " << targetY << ")!"  << endl;
 
