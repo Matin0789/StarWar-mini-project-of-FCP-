@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
-#include <stdlib.h>
+#include <conio.h>
+#include <stdlib.h> 
 #include <ctime>
 
 #define RESET   "\033[0m"
@@ -23,7 +24,7 @@
 
 #define row 10
 #define col 10
-#define NumberOfEnemys col
+#define NumberOfEnemys 10
 
 using namespace std;
 
@@ -44,15 +45,19 @@ int howManyEnemy(void);
 void action(int condition[col][row]);
 void move(int condition[col][row]);
 void shoot(int condition[col][row]);
-void run(void);
+void gameRun(void);
 
 // main function
 int main()
 {
-    system("cls");
-    run();
+    gameRun();
+    return 0;
+}
+void gameRun(void)
+{
     srand(time(NULL));
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
+      
     mySpaceShip.x = xFirst;
     mySpaceShip.y = yFirst;
     condition[mySpaceShip.x][mySpaceShip.y] = 1;
@@ -70,34 +75,8 @@ int main()
             }
         }
     }
-    for (int i = 0;i < row;i++)
-    {
-        int count = 0;
-        for (int j = 0;j < col;j++)
-        {
-            if(condition[i][j] == 2)
-                count++;
-        }
-        if (count > 9)
-        {
-            int x = rand()%col,y = rand()%row;
-            while (x == i)
-            {
-                int x = rand()%col,y = rand()%row;
-            }
-            if (condition[x][y] != 0)
-                continue;
-            else 
-            {
-                condition[x][y] = 2;
-                break;
-            }
-        }
-
-    }
     while ( mySpaceShip.health != 0 )
     { 
-        
         grandDraw(condition);
         action(condition);
         getchar();
@@ -106,27 +85,25 @@ int main()
     cout << RED << "********************************GAME OVER********************************"<< endl << RESET;
     system("pause");
     exit(0);
-    return 0;
+}
+int howManyEnemy()
+{
+	int condition[col][row];
+    int count = 0;
+    for (int i = 0; i < col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            if (condition[i][j] == 2)
+            {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
-
-// functions
-void run(void)
-{
-    cout << BOLDRED;
-    for (int i = 0;i < 32;i++)
-    {
-        cout << "*";
-        Sleep(1);
-    }
-    cout << "STARWARS";
-    for (int i = 0;i < 32;i++)
-    {
-        cout << "*";
-        Sleep(1);
-    }
-}  
-
+// functions  
 void horizontalDraw(void)
 {
     cout << BOLDBLUE;
@@ -292,7 +269,7 @@ void move(int condition[col][row])
     
 }
 
-void shoot(int condition[col][row])
+void shoot(int condition[row][col])
 {
     char shoot;
     bool flag =true;
