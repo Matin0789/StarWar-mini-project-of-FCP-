@@ -50,6 +50,7 @@ void gameRun(void);
 // main function
 int main()
 {
+    system("cls");
     gameRun();
     return 0;
 }
@@ -75,6 +76,20 @@ void gameRun(void)
             }
         }
     }
+
+    for (int i = 0; i < 32; i++)
+    {
+        cout << YELLOW << "*" << RESET;
+        Sleep(5);
+    }
+    cout << YELLOW << "STARWARS" << RESET;
+    for (int i = 0; i < 32; i++)
+    {
+        cout << YELLOW << "*" << RESET;
+        Sleep(5);
+    }
+    system("cls");
+
     while ( mySpaceShip.health != 0 )
     { 
         grandDraw(condition);
