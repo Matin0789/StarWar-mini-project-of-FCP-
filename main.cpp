@@ -53,7 +53,7 @@ int main()
 {
     srand(time(NULL));
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
-    gameRun();
+    gameRun(condition);
     while ( mySpaceShip.health != 0 )
     { 
         grandDraw(condition);
