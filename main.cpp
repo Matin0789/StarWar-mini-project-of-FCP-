@@ -33,8 +33,8 @@ using namespace std;
 // Our spaceship structure
 struct
 {
-    const int xFirst = rand()%col;
-    const int yFirst = rand()%row;
+    const int xFirst;
+    const int yFirst;
     int x, y;
     char c = '#';
     int health = 3;
@@ -53,6 +53,8 @@ void gameRun(int condition[col][row]);
 int main()
 {
     srand(time(NULL));
+    mySpaceShip.xFirst = rand()%col;
+    mySpaceShip.yFirst = rand()%row;
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
     gameRun(condition);
     while ( mySpaceShip.health != 0 )
@@ -67,6 +69,8 @@ int main()
     exit(0);
     return 0;
 }
+
+// functions  
 void gameRun(int condition[col][row])
 {
     system("cls");
@@ -102,6 +106,7 @@ void gameRun(int condition[col][row])
     system("cls");
 
 }
+
 int howManyEnemy()
 {
 	int condition[col][row];
@@ -119,7 +124,6 @@ int howManyEnemy()
     return count;
 }
 
-// functions  
 void horizontalDraw(void)
 {
     cout << BOLDBLUE;
