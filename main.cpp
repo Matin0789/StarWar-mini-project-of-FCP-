@@ -33,8 +33,8 @@ using namespace std;
 // Our spaceship structure
 struct
 {
-    const int xFirst;
-    const int yFirst;
+    int xFirst;
+    int yFirst;
     int x, y;
     char c = '#';
     int health = 3;
@@ -73,7 +73,7 @@ int main()
 // functions  
 void gameRun(int condition[col][row])
 {
-    system("cls");
+    //system("cls");
 
     mySpaceShip.x = mySpaceShip.xFirst;
     mySpaceShip.y = mySpaceShip.yFirst;
