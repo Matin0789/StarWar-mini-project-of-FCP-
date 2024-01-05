@@ -35,6 +35,7 @@ const int yFirst = rand()%row;
 struct 
 {
     int x, y;
+    char c = '#';
     int health = 3;
 }mySpaceShip;
 
@@ -45,23 +46,31 @@ int howManyEnemy(void);
 void action(int condition[col][row]);
 void move(int condition[col][row]);
 void shoot(int condition[col][row]);
-void gameRun(void);
+void gameRun(int condition[col][row]);
 
 // main function
 int main()
 {
-    system("cls");
-    gameRun();
-    return 0;
-}
-void gameRun(void)
-{
     srand(time(NULL));
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
-      
+    gameRun();
+    while ( mySpaceShip.health != 0 )
+    { 
+        grandDraw(condition);
+        action(condition);
+        getchar();
+    }
+    system("cls");
+    cout << RED << "********************************GAME OVER********************************"<< endl << RESET;
+    system("pause");
+    exit(0);
+    return 0;
+}
+void gameRun(int condition[col][row])
+{
+    system("cls");
     mySpaceShip.x = xFirst;
     mySpaceShip.y = yFirst;
-    condition[mySpaceShip.x][mySpaceShip.y] = 1;
     for (int i = 0;i < NumberOfEnemys;i++)
     {
         while (true)
@@ -90,16 +99,6 @@ void gameRun(void)
     }
     system("cls");
 
-    while ( mySpaceShip.health != 0 )
-    { 
-        grandDraw(condition);
-        action(condition);
-        getchar();
-    }
-    system("cls");
-    cout << RED << "********************************GAME OVER********************************"<< endl << RESET;
-    system("pause");
-    exit(0);
 }
 int howManyEnemy()
 {
@@ -139,8 +138,8 @@ void grandDraw(int condition[col][row])
         for (int j = 0;j < col;j++)
         {
             cout << BOLDBLUE <<"| " << RESET;
-            if (condition[j][i] == 1)
-                cout << BOLDGREEN <<"# " << RESET;
+            if (j == mySpaceShip.x &&  i == mySpaceShip.y)
+                cout << BOLDGREEN << mySpaceShip.c << ' ' << RESET;
             else if (condition[j][i] == 2)
             {
                 cout << BOLDRED << "* " << RESET;
