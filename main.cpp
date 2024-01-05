@@ -29,11 +29,12 @@
 using namespace std;
 
 // global variables
-const int xFirst = rand()%col;
-const int yFirst = rand()%row;
+
 // Our spaceship structure
-struct 
+struct
 {
+    const int xFirst = rand()%col;
+    const int yFirst = rand()%row;
     int x, y;
     char c = '#';
     int health = 3;
@@ -69,8 +70,9 @@ int main()
 void gameRun(int condition[col][row])
 {
     system("cls");
-    mySpaceShip.x = xFirst;
-    mySpaceShip.y = yFirst;
+
+    mySpaceShip.x = mySpaceShip.xFirst;
+    mySpaceShip.y = mySpaceShip.yFirst;
     for (int i = 0;i < NumberOfEnemys;i++)
     {
         while (true)
@@ -203,8 +205,8 @@ void move(int condition[col][row])
                 mySpaceShip.health--;
                 cout << RED << "!--ops--" << RESET;
                 condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = xFirst;
-                mySpaceShip.y = yFirst;
+                mySpaceShip.x = mySpaceShip.xFirst;
+                mySpaceShip.y = mySpaceShip.yFirst;
                 condition[mySpaceShip.x][mySpaceShip.y] = 1;
                 getchar();
             }
@@ -222,8 +224,8 @@ void move(int condition[col][row])
                 mySpaceShip.health--;
                 cout << RED << "!--ops--" << RESET;
                 condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = xFirst;
-                mySpaceShip.y = yFirst;
+                mySpaceShip.x = mySpaceShip.xFirst;
+                mySpaceShip.y = mySpaceShip.yFirst;
                 condition[mySpaceShip.x][mySpaceShip.y] = 1;
                 getchar();
             }
@@ -241,8 +243,8 @@ void move(int condition[col][row])
                 mySpaceShip.health--;
                 cout << RED << "!--ops--" << RESET;
                 condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = xFirst;
-                mySpaceShip.y = yFirst;
+                mySpaceShip.x = mySpaceShip.xFirst;
+                mySpaceShip.y = mySpaceShip.yFirst;
                 condition[mySpaceShip.x][mySpaceShip.y] = 1;
                 getchar();
             }
@@ -260,8 +262,8 @@ void move(int condition[col][row])
                 mySpaceShip.health--;
                 cout << RED << "!--ops--" << RESET;
                 condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = xFirst;
-                mySpaceShip.y = yFirst;
+                mySpaceShip.x = mySpaceShip.xFirst;
+                mySpaceShip.y = mySpaceShip.yFirst;
                 condition[mySpaceShip.x][mySpaceShip.y] = 1;
                 getchar();
             }
