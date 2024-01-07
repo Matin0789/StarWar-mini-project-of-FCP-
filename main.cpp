@@ -168,7 +168,7 @@ void action(int condition[col][row])
         default:
             cout << RED << "undefined please enter to try again" << RESET << endl;
             getchar();
-            getchar();g
+            getchar();
             flag = false;
         }
     } while (flag = false);
