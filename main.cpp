@@ -27,37 +27,36 @@
 
 using namespace std;
 
-// global variables
-
 // Our spaceship structure
-struct
+struct spaceship
 {
     int xFirst;
     int yFirst;
     int x, y;
     char c = '#';
     int health = 3;
-}mySpaceShip;
+};
 
 // function portotype
-void grandDraw(int condition[col][row]);
+void grandDraw(int condition[col][row],spaceship &mySpaceShip);
 void horizontalDraw(void);
-void action(int condition[col][row]);
-void move(int condition[col][row]);
-void shoot(int condition[col][row]);
-void gameRun(int condition[col][row]);
+void action(int condition[col][row],spaceship &mySpaceShip);
+void move(int condition[col][row],spaceship &mySpaceShip);
+void shoot(int condition[col][row],spaceship &mySpaceShip);
+void gameRun(int condition[col][row],spaceship &mySpaceShip);
 
 // main function
 int main()
 {
     system("cls");
     srand(time(NULL));
+    spaceship mySpaceShip; 
     int condition[col][row];// condition of our game houses 0 for null and 1 for OurSpace ship and 2 for our enemys
-    gameRun(condition);
+    gameRun(condition,mySpaceShip);
     while ( mySpaceShip.health != 0 )
     { 
-        grandDraw(condition);
-        action(condition);
+        grandDraw(condition,mySpaceShip);
+        action(condition,mySpaceShip);
     }
     system("cls");
     cout << RED << "********************************GAME OVER********************************"<< endl << RESET;
@@ -67,7 +66,7 @@ int main()
 }
 
 // functions  
-void gameRun(int condition[col][row])
+void gameRun(int condition[col][row],spaceship &mySpaceShip)
 {
     mySpaceShip.xFirst = rand()%col;
     mySpaceShip.yFirst = rand()%row;
@@ -111,7 +110,7 @@ void horizontalDraw(void)
         cout << " ---";
     cout << RESET;
 }
-void grandDraw(int condition[col][row])
+void grandDraw(int condition[col][row],spaceship &mySpaceShip)
 {
     system("cls");
     bool win = false;
@@ -146,7 +145,7 @@ void grandDraw(int condition[col][row])
     }
 }
 
-void action(int condition[col][row])
+void action(int condition[col][row],spaceship &mySpaceShip)
 {
     char moveOrShoot;
     bool flag =true;
@@ -157,12 +156,12 @@ void action(int condition[col][row])
         switch (moveOrShoot)
         {
         case 'm':
-            move(condition);
+            move(condition,mySpaceShip);
             flag = true;
             break;
 
         case 's':
-            shoot(condition);
+            shoot(condition,mySpaceShip);
             flag = true;
             break;
 
@@ -175,7 +174,7 @@ void action(int condition[col][row])
     } while (flag = false);
 }
 
-void move(int condition[col][row])
+void move(int condition[col][row],spaceship &mySpaceShip)
 {
     char move;
     bool flag = true;
@@ -277,7 +276,7 @@ void move(int condition[col][row])
     
 }
 
-void shoot(int condition[row][col])
+void shoot(int condition[row][col],spaceship &mySpaceShip)
 {
     char shoot;
     bool flag = true;
