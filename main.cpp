@@ -71,6 +71,7 @@ void gameRun(int condition[col][row])
 {
     mySpaceShip.xFirst = rand()%col;
     mySpaceShip.yFirst = rand()%row;
+    condition[mySpaceShip.xFirst][mySpaceShip.xFirst] = 1;
     mySpaceShip.x = mySpaceShip.xFirst;
     mySpaceShip.y = mySpaceShip.yFirst;
     for (int i = 0;i < NumberOfEnemys;i++)
