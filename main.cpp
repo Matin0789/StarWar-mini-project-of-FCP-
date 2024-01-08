@@ -1,6 +1,5 @@
 #include <iostream>
-#include <windows.h>
-#include <stdlib.h> 
+#include <windows.h> 
 #include <ctime>
 
 #define RESET   "\033[0m"
