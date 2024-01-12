@@ -1,3 +1,7 @@
+// matin amir panahfar _40212358003
+// nima makhmali _40212358035
+// buali sina university
+
 #include <iostream>
 #include <windows.h> 
 #include <ctime>
