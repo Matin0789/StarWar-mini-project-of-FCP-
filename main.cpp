@@ -43,6 +43,7 @@ void action(int condition[col][row],spaceship &mySpaceShip);
 void move(int condition[col][row],spaceship &mySpaceShip);
 void shoot(int condition[col][row],spaceship &mySpaceShip);
 void gameRun(int condition[col][row],spaceship &mySpaceShip);
+void lossHealth(int condition[col][row],spaceship &mySpaceShip);
 
 // main function
 int main()
@@ -186,14 +187,7 @@ void move(int condition[col][row],spaceship &mySpaceShip)
         case 'u':
             if (condition[mySpaceShip.x][mySpaceShip.y - 1] == 2)
             {
-                mySpaceShip.health--;
-                cout << RED << "!--ops--" << RESET;
-                getchar();
-                getchar();
-                condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = mySpaceShip.xFirst;
-                mySpaceShip.y = mySpaceShip.yFirst;
-                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                lossHealth(condition,mySpaceShip);;
             }
             else if(mySpaceShip.y - 1 >= 0 && mySpaceShip.y - 1 < row)
             {
@@ -206,14 +200,7 @@ void move(int condition[col][row],spaceship &mySpaceShip)
         case 'd':
             if (condition[mySpaceShip.x][mySpaceShip.y + 1] == 2)
             {
-                mySpaceShip.health--;
-                cout << RED << "!--ops--" << RESET;
-                getchar();
-                getchar();
-                condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = mySpaceShip.xFirst;
-                mySpaceShip.y = mySpaceShip.yFirst;
-                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                lossHealth(condition,mySpaceShip);
             }
             else if(mySpaceShip.y + 1 >= 0 && mySpaceShip.y + 1 < row)
             {
@@ -226,14 +213,7 @@ void move(int condition[col][row],spaceship &mySpaceShip)
         case 'r':
             if (condition[mySpaceShip.x + 1][mySpaceShip.y] == 2)
             {
-                mySpaceShip.health--;
-                cout << RED << "!--ops--" << RESET;
-                getchar();
-                getchar();
-                condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = mySpaceShip.xFirst;
-                mySpaceShip.y = mySpaceShip.yFirst;
-                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                lossHealth(condition,mySpaceShip);
             }
             else if(mySpaceShip.x + 1 >= 0 && mySpaceShip.x + 1 < col)
             {
@@ -246,14 +226,7 @@ void move(int condition[col][row],spaceship &mySpaceShip)
         case 'l':
             if (condition[mySpaceShip.x - 1][mySpaceShip.y] == 2)
             {
-                mySpaceShip.health--;
-                cout << RED << "!--ops--" << RESET;
-                getchar();
-                getchar();
-                condition[mySpaceShip.x][mySpaceShip.y] = 0;
-                mySpaceShip.x = mySpaceShip.xFirst;
-                mySpaceShip.y = mySpaceShip.yFirst;
-                condition[mySpaceShip.x][mySpaceShip.y] = 1;
+                lossHealth(condition,mySpaceShip);
             }
             else if(mySpaceShip.x - 1 >= 0 && mySpaceShip.x - 1 < col)
             {
@@ -270,9 +243,18 @@ void move(int condition[col][row],spaceship &mySpaceShip)
             flag = false;
         }
     }while (flag == false);
-    
-    
-    
+}
+
+void lossHealth(int condition[col][row],spaceship &mySpaceShip)
+{
+    mySpaceShip.health--;
+    cout << RED << "!--ops--" << RESET;
+    getchar();
+    getchar();
+    condition[mySpaceShip.x][mySpaceShip.y] = 0;
+    mySpaceShip.x = mySpaceShip.xFirst;
+    mySpaceShip.y = mySpaceShip.yFirst;
+    condition[mySpaceShip.x][mySpaceShip.y] = 1;
 }
 
 void shoot(int condition[row][col],spaceship &mySpaceShip)
